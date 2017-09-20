@@ -1,6 +1,5 @@
 module Multiplexador
- ( parameter n = 16;
-	 input [n-1:0] R0, R1, R2, R3, R4, R5, R6, R7, Din, Gout,
+ ( input [15:0] R0, R1, R2, R3, R4, R5, R6, R7, Din, Gout,
 	 input [7:0] selectR;
 	 input selectG, selectDin;
 
@@ -21,6 +20,6 @@ module Multiplexador
 					8'b00000110: saida = R6;
 					8'b00000111: saida = R7;
 				endcase
-			end		
+			end
 		end
 endmodule

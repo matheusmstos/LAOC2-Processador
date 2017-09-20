@@ -1,6 +1,5 @@
 module upcount
-	(
-		input Clear, Clock,
+	( input Clear, Clock,
 		output reg [2:0] Q
 	);
 

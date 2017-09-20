@@ -1,7 +1,6 @@
 module ALU
-	( parameter n = 16;
-		input [n-1:0] A,
-		input [n-1:0] b,
+	( input [15:0] A,
+		input [15:0] b,
 		input [3:0] op;
 		input Addsub, //vem do controlador
 
