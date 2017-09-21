@@ -2,15 +2,15 @@
  ( input [15:0] R0, R1, R2, R3, R4, R5, R6, R7, DIN, G,
 	 input [7:0] selectR,
 	 input selectG, selectDin,
-
-	 output reg [n-1:0] saida
+		
+	 output reg [15:0] saida
 	 );
 
 		always @ (selectG or selectDin or selectR) begin
-			if (selectG) saida = Gout;
-			else if (selectDin) saida = Din
+			if (selectG) saida = selectG;
+			else if (selectDin) saida = selectDin;
 			else begin
-				case(selectR) begin
+				case(selectR)
 					8'b00000000: saida = R0;
 					8'b00000001: saida = R1;
 					8'b00000010: saida = R2;

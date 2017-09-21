@@ -30,7 +30,7 @@ endmodule
 
 module regc //o registrador 7 eh um contador de intrucoes, o famoso ponteiro de intructions
 	(	input [15:0] R,
-		input Rin, Clock, Clear, Acress
+		input Rin, Clock, Clear, Acress,
 		output reg [15:0] Q
 	);
 
@@ -38,8 +38,8 @@ module regc //o registrador 7 eh um contador de intrucoes, o famoso ponteiro de 
 	always @(posedge Clock)
 		if (Rin)
 			Q <= R;
-		else if(acress) Q = Q + 1'b1;
-		else if(clear) Q = 16'b0;
+		else if(Acress) Q = Q + 1'b1;
+		else if(Clear) Q = 16'b0;
 endmodule 
 
 

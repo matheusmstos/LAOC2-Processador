@@ -1,11 +1,10 @@
 module ALU
 	(	input [15:0] A,
 		input [15:0] b,
-		input [3:0] op;
+		input [3:0] op,
 		//input Addsub, //vem do controlador
-
-		output reg [15:0] result,
-		);
+		output reg [15:0] result
+	);
 
 		parameter add  = 4'b0000; //soma
 		parameter sub  = 4'b0001;	//sub
@@ -19,9 +18,9 @@ module ALU
 				add: result = A + b;
 				sub: result = A - b;
 				slt: if(A < b)result = 16'b1; else result = 16'b0;
-				sll: A << b;
-				slr: A >> b;
-				endi: A & b;
+				sll: result = A << b;
+				slr: result = A >> b;
+				endi:result = A & b;
 			endcase
 		end
 
