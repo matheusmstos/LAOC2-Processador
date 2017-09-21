@@ -1,10 +1,10 @@
 module ALU
-	( input [15:0] A,
+	(	input [15:0] A,
 		input [15:0] b,
 		input [3:0] op;
-		input Addsub, //vem do controlador
+		//input Addsub, //vem do controlador
 
-		output reg [n-1:0] result,
+		output reg [15:0] result,
 		);
 
 		parameter add  = 4'b0000; //soma

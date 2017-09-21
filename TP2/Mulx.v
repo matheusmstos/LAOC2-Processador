@@ -1,9 +1,9 @@
-module Multiplexador
- ( input [15:0] R0, R1, R2, R3, R4, R5, R6, R7, Din, Gout,
-	 input [7:0] selectR;
-	 input selectG, selectDin;
+ module Multiplexador
+ ( input [15:0] R0, R1, R2, R3, R4, R5, R6, R7, DIN, G,
+	 input [7:0] selectR,
+	 input selectG, selectDin,
 
-	 output reg [n-1:0] saida;
+	 output reg [n-1:0] saida
 	 );
 
 		always @ (selectG or selectDin or selectR) begin

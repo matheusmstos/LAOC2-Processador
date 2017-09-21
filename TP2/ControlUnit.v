@@ -1,22 +1,22 @@
 module Unidade_Controle
 	(	input Run, Resetn, clock,
-		input [1:0] Counter,
-		input TS, Xreg, Yreg,
+		input [2:0] Counter,
+		input	Xreg, Yreg,
 		input [9:0] IRout,
 
 		output reg IRin, Gout, DINout, Ain, Gin, AddSub,
 		output reg [7;0] Rin,
 		output reg [7:0] Rout,
-		output reg Clear, Done
+		output reg Clear, Done, Acress
 
 	);
 
-	parameter add  = 4'b0000; //soma
-	parameter sub  = 4'b0001;	//sub
-	parameter slt  = 4'b0010;	//set less then
-	parameter sll  = 4'b0011; //shift logic left
-	parameter slr  = 4'b0100;	//shift logic right
-	parameter endi = 4'b0101; //and(&)
+	parameter add  = 3'b000; //soma
+	parameter sub  = 3'b001; //sub
+	parameter slt  = 3'b010; //set less then
+	parameter sll  = 3'b011; //shift logic left
+	parameter slr  = 3'b100; //shift logic right
+	parameter endi = 3'b101; //and(&)
 
 	always @(Tstep_Q or I or Xreg or Yreg)
 	begin
