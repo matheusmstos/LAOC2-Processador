@@ -9,31 +9,30 @@ module dec3to8
 	begin
 		if (En == 1)
 			case (W)
-				3'b000: Y = 8'b00000000;
-				3'b001: Y = 8'b00000001;
-				3'b010: Y = 8'b00000010;
-				3'b011: Y = 8'b00000100;
+				3'b000: Y = 8'b10000000;
+				3'b001: Y = 8'b01000000;
+				3'b010: Y = 8'b00100000;
+				3'b011: Y = 8'b00010000;
 				3'b100: Y = 8'b00001000;
-				3'b101: Y = 8'b00010000;
-				3'b110: Y = 8'b00100000;
-				3'b111: Y = 8'b01000000;
-
+				3'b101: Y = 8'b00000100;
+				3'b110: Y = 8'b00000010;
+				3'b111: Y = 8'b00000001;
+				
 			endcase
-
 		else
 			Y = 8'b00000000;
 
 	end
 endmodule
 
-module display (Entrada, SaidaDisplay);
+module Display (Entrada, SaidaDisplay);
   input [3:0] Entrada;
   output reg [0:6] SaidaDisplay;
 
   //Decodificador Display de 7 segmentos
   always begin
     case(Entrada)
-      0:  SaidaDisplay = 7'b0000001; //0
+      0:  SaidaDisplay = 7'b1000000; //0
       1:  SaidaDisplay = 7'b1001111; //1
       2:  SaidaDisplay = 7'b0010010; //2
       3:  SaidaDisplay = 7'b0000110; //3

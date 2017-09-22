@@ -1,6 +1,6 @@
 module regn
 	( input [15:0] R,	//valor
-		input Rin, Clock 			//vem do controlador
+		input Rin, Clock, 
 		output reg [15:0] Q
 	);
 

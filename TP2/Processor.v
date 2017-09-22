@@ -3,7 +3,7 @@ module Processador
 		input [15:0] DIN,
 		input Resetn, Clock, Run,
 		output reg Done,
-		output reg [15:0]BusWires
+		output [15:0]BusWires,
 
 		output [15:0] Adress_out,
 		output [15:0] DOUT,
@@ -50,7 +50,7 @@ module Processador
 		G_out      = 1'b0;
 		Acressimo	     = 1'b0;
 		DIN_out    = 1'b0;
-		Address_in = 1'b0;
+		Adress_in = 1'b0;
 		Enable_escrita_mem = 1'b0;
 
 		case (Ciclo)
@@ -66,7 +66,7 @@ module Processador
 			end
 
 			3'b100: begin //Time Step 4
-				case (I)
+				case (opcode)
 
 					ld: begin
 						Adress_in = 1'b1;
@@ -105,7 +105,7 @@ module Processador
 			end
 
 			3'b101: begin	//Time Step 5
-				case(I)
+				case(opcode)
 					ld: begin
 						//Delay Time
 					end
@@ -126,7 +126,7 @@ module Processador
 			end
 
 			3'b110: begin	//Time Step 6
-				case (I)
+				case (opcode)
 
 					ld: begin
 						//Delay Time
@@ -151,7 +151,7 @@ module Processador
 			end
 
 			3'b111: begin	//Time Step 7
-				case (I)
+				case (opcode)
 
 					ld: begin
 						DIN_out = 1'b1;
@@ -187,14 +187,14 @@ module Processador
 	regn reg_G (ALU_result, G_in, Clock, G);
 	regi reg_i (DIN[9:0], IR_in, Clock, IR);
 	regn ADOut (BusWires, Adress_in, Clock, Adress_out);
-	regn DOUT	 (BusWires, Done, Clock, DOUT);
+	regn DOUTn	 (BusWires, Done, Clock, DOUT);
 
-	ALU alu (A, BussWires, opcode, ALU_result);
+	ALU alu (A, BusWires, opcode, ALU_result);
 	Multiplexador mux(R0,R1,R2,R3,R4,R5,R6,R7,DIN,G,R_out,G_out,DIN_out,BusWires);
 
 endmodule
 
-module Preocessor(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7);
+module Processor(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7);
 	input [17:0]SW;
 	input [3:0]KEY;
 	output [17:0]LEDR;
@@ -212,7 +212,8 @@ module Preocessor(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7);
 	wire Run;
 	wire [2:0]Ciclo;
 
-	Processor proc(MemOut,KEY[3],SW[16],SW[17],Done,Escrita,AddressOut,BusWires,DOUT,Ciclo);
+	//Processador proc(MemOut,KEY[3],SW[16],SW[17],Done,Escrita,AddressOut,BusWires,DOUT,Ciclo);
+	Processador proc (MemOut,SW[16],KEY[3],SW[17],Done, BusWires,AddressOut,DOUT,Escrita,Ciclo);
 	ramlpm mem(AddressOut[4:0],KEY[3],DOUT,Escrita,MemOut);
 
 	assign LEDR[15:0] = BusWires[15:0];
@@ -240,7 +241,7 @@ module Preocessor(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7);
 	*/
 
 	Display d7 (BusWires[15:12]  ,HEX7);
-	Display d6 ({1'b0,Ciclo[2:0]}      ,HEX6);
+	Display d6 ({1'b0,Ciclo[2:0]}  ,HEX6);
 	Display d5 (AddressOut[7:4]    ,HEX5);
 	Display d4 (AddressOut[3:0]    ,HEX4);
 
